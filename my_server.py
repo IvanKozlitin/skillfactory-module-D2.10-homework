@@ -16,7 +16,7 @@ class NotFound(Exception):
     pass
 
 
-@error(404)
+@error(500)
 def error404(error):
     raise NotFound("Страница не найдена")
 
