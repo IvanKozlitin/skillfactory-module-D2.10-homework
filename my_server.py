@@ -1,6 +1,6 @@
 ﻿import os
 import sentry_sdk
-from bottle import run, route, HTTPResponse
+from bottle import run, route
 from sentry_sdk.integrations.bottle import BottleIntegration
 
 sentry_sdk.init(
@@ -16,13 +16,13 @@ class NotFound(Exception):
     pass
 
 
-# @error(404)
-# def error404(error):
-#     raise NotFound("Страница не найдена")
+@error(404)
+def error404(error):
+    raise NotFound("Страница не найдена")
 
 @route("/")
 def hello_page():
-    return HTTPResponse(200, "Привет!")
+    return "Привет!"
 
 
 @route('/fail')
@@ -32,7 +32,7 @@ def index_fail():
 
 @route('/success')
 def index_success():
-    return HTTPResponse(200, "Запрос успешный")
+    return "Запрос успешный"
 
 
 if __name__ == "__main__":
