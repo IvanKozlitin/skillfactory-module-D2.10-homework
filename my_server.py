@@ -1,6 +1,7 @@
+﻿import os
 import sentry_sdk
 
-from bottle import Bottle
+from bottle import Bottle, run, error
 from sentry_sdk.integrations.bottle import BottleIntegration
 
 sentry_sdk.init(
@@ -10,6 +11,16 @@ sentry_sdk.init(
 
 app = Bottle()
 
+
+class NotFound(Exception):
+    """
+    Используется для идентификации ошибки 404, для последующей отправки в sentry.io
+    """
+    pass
+
+@error(404)
+def error404(error):
+    raise NotFound("Страница не найдена")
 
 @app.route('/fail')
 def index_fail():
@@ -21,4 +32,7 @@ def index_success():
     return "Запрос успешный"
 
 
-app.run(host='skillfactory-module-d2-10-home.herokuapp.com', port=8080)
+if os.environ.get('APP_LOCATION') == 'heroku':
+    run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+else:
+    run(host='localhost', port=8080, debug=True)
