@@ -1,17 +1,12 @@
 ﻿import os
 import sentry_sdk
-from bottle import run, route, error, HTTPResponse
+from bottle import run, route, HTTPResponse
 from sentry_sdk.integrations.bottle import BottleIntegration
 
 sentry_sdk.init(
     dsn="https://0798cf0e952f479480e8b65241658ba8@o472515.ingest.sentry.io/5506736",
     integrations=[BottleIntegration()]
 )
-
-
-@error(404)
-def error404():
-    return HTTPResponse(status=404, body="Страница не найдена")
 
 
 @route("/")
