@@ -35,16 +35,10 @@ def index_success():
     return HTTPResponse(200, "Запрос успешный")
 
 
-if os.environ.get('SERVER_URL') == 'https://skillfactory-module-d2-10-home.herokuapp.com':
+if __name__ == "__main__":
     run(
         host='0.0.0.0',
         port=int(os.environ.get('PORT', 5000)),
         server='gunicorn',
         workers=3
-    )
-else:
-    run(
-        host='localhost',
-        port=8080,
-        debug=True
     )
