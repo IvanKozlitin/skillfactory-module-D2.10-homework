@@ -9,16 +9,10 @@ sentry_sdk.init(
 )
 
 
-class NotFound(Exception):
-    """
-    Используется для идентификации ошибки 404, для последующей отправки в sentry.io
-    """
-    pass
-
-
 @error(404)
-def error404(error):
-    raise NotFound("Страница не найдена")
+def error404():
+    return HTTPResponse(status=404, body="Страница не найдена")
+
 
 @route("/")
 def hello_page():
