@@ -2,9 +2,10 @@
 import sentry_sdk
 from bottle import run, route, HTTPResponse
 from sentry_sdk.integrations.bottle import BottleIntegration
+from userconf import USER_DSN
 
 sentry_sdk.init(
-    dsn="...",
+    dsn=USER_DSN,
     integrations=[BottleIntegration()]
 )
 
