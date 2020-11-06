@@ -1,0 +1,6 @@
+bottle
+certifi
+pip
+sentry-sdk
+setuptools
+urllib3
