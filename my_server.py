@@ -21,4 +21,4 @@ def index_success():
     return "Запрос успешный"
 
 
-app.run(host='localhost', port=8080)
+app.run(host='https://skillfactory-module-d2-10-home.herokuapp.com:8080', port=8080)
