@@ -1,6 +1,6 @@
 ﻿import os
 import sentry_sdk
-from bottle import run, route
+from bottle import run, route, error
 from sentry_sdk.integrations.bottle import BottleIntegration
 
 sentry_sdk.init(
